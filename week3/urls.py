@@ -15,16 +15,38 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from jobsite.views import main_view, vacancy_view, vacancies_specialization_view, \
-    company_view, vacancies_view, custom_handler404, custom_handler500
+from jobsite.views import *
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_view, name='main'),
-    path('vacancies/<int:vacancy_pk>/', vacancy_view, name='vacancy'),
+    path('vacancies/<slug:pk>/', VacancyView.as_view(), name='vacancy'),
+    path('vacancies/<slug:pk>/edit/', edit_view, name='edit'),
     path('vacancies/cat/<str:url_specialty>/', vacancies_specialization_view, name='vacancies_special'),
     path('companies/<int:company_pk>/', company_view, name='company'),
     path('vacancies/', vacancies_view, name='vacancies'),
+    path('mycompanies/', my_companies_view, name='my_company_start'),
+    path('mycompany/letsstart/', my_company_start, name='my_company_start'),
+    path('mycompany/letsstart/create/<slug:pk>/', CompanyView.as_view(), name='my_company_create'),
+    path('mycompany/letsstart/create/<slug:pk>/success/', success_view, name='success_view'),
+    path('companies/<slug:pk>/edit', CompanyViewUpdate.as_view(), name='my_company_empty_form'),
+    path('mycompany/vacancies/', my_vacancy, name='my_vacancy_start'),
+    path('mycompany/vacancies/create/<slug:pk>/', MyVacanciesView.as_view(), name='my_vacancies_create'),
+    path('mycompany/vacancies/create/<slug:pk>/success/', my_vacancy_success, name='my_vacancies_success'),
+    path('login/', login.as_view(), name='login'),
+    path('register/', register, name='register'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+
+
 handler404 = custom_handler404
 handler500 = custom_handler500

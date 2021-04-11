@@ -4,141 +4,169 @@ import django
 os.environ["DJANGO_SETTINGS_MODULE"] = 'week3.settings'
 django.setup()
 
+from django.contrib.auth.models import User
 from jobsite.models import Vacancy, Company, Specialty
 
 if __name__ == '__main__':
 
+    admin = User.objects.create_superuser(
+        username='admin', password='admin'
+    )
+
+    workiro_director = User.objects.create_user(
+        username='Alex', password='workiro'
+    )
+
+    rebelrage_director = User.objects.create_user(
+        username='Tom', password='rebelrage'
+    )
+
+    staffingsmarter_director = User.objects.create_user(
+        username='Kile', password='aaa'
+    )
+
+    evilthreath_director = User.objects.create_user(
+        username='Ksile', password='aaa'
+    )
+    hirey_director = User.objects.create_user(
+        username='sad', password='asd'
+    )
+    swiftattack_director = User.objects.create_user(
+        username='aads', password='asdq'
+    )
+    troller_director = User.objects.create_user(
+        username='qqe', password='aszxc'
+    )
+    primalassault_director = User.objects.create_user(
+        username='imn', password='asdqessd'
+    )
+
     specialty_frontend = Specialty(
         code="frontend",
         title="Фронтенд",
-        picture="specty_frontend.png",
     )
     specialty_frontend.save()
 
     specialty_backend = Specialty(
         code="backend",
         title="Бэкэнд",
-        picture="specty_backend.png",
     )
     specialty_backend.save()
 
     specialty_gamedev = Specialty(
         code="gamedev",
         title="Геймдев",
-        picture="specty_gamedev.png",
     )
     specialty_gamedev.save()
 
     specialty_devops = Specialty(
         code="devops",
         title="Девопс",
-        picture="specty_devops.png",
     )
     specialty_devops.save()
 
     specialty_design = Specialty(
         code="design",
         title="Дизайн",
-        picture="specty_design.png",
     )
     specialty_design.save()
 
     specialty_products = Specialty(
         code="products",
         title="Продукты",
-        picture="specty_products.png",
     )
     specialty_products.save()
 
     specialty_management = Specialty(
         code="management",
         title="Менеджмент",
-        picture="specty_management.png",
     )
+    specialty_management.save()
 
     specialty_testing = Specialty(
         code="testing",
         title="Тестирование",
-        picture="specty_testing.png",
     )
+    specialty_testing.save()
 
     company_workiro = Company(
         id="1",
         name="Workiro",
-        logo="logo1.png",
         employee_count="10",
         location="Новосибирск",
-        description="Разрабатываем мобильные приложения и сервисы для сферы онлайн-обучения."
+        description="Разрабатываем мобильные приложения и сервисы для сферы онлайн-обучения.",
+        owner=workiro_director
     )
     company_workiro.save()
 
+    print(134)
     comapany_rebelrage = Company(
         id="2",
         name="Rebel Rage",
-        logo="logo2.png",
         employee_count="24",
         location="Москва",
-        description="Мобильные сервисы, программное обеспечение, веб-сайты, мобильные приложения."
+        description="Мобильные сервисы, программное обеспечение, веб-сайты, мобильные приложения.",
+        owner=rebelrage_director
     )
     comapany_rebelrage.save()
 
     company_staffingsmarter = Company(
         id="3",
         name="Staffing Smarter",
-        logo="logo3.png",
         employee_count="123",
         location="Москва",
-        description="Сервис онлайн-наблюдения за процессом сдачи экзамена с искусственным интеллектом"
+        description="Сервис онлайн-наблюдения за процессом сдачи экзамена с искусственным интеллектом",
+        owner=staffingsmarter_director
     )
     company_staffingsmarter.save()
 
     company_evilthreat = Company(
         id="4",
         name="Evil Threath",
-        logo="logo4.png",
         employee_count="36",
         location="Москва",
-        description="Лидирующее в России и Восточной Европе ПО для проведения вебинаров и видео-конференций."
+        description="Лидирующее в России и Восточной Европе ПО для проведения вебинаров и видео-конференций.",
+        owner=evilthreath_director
     )
     company_evilthreat.save()
 
     company_hirey = Company(
         id="5",
         name="Hirey",
-        logo="logo5.png",
         employee_count="21",
         location="Воронеж",
-        description="Телекоммуникационные и платежные сервисы, которые помогают развиваться бизнесам во всем мире."
+        description="Телекоммуникационные и платежные сервисы, которые помогают развиваться бизнесам во всем мире.",
+        owner=hirey_director
     )
     company_hirey.save()
 
     company_swiftattack = Company(
         id="6",
         name="Swift Attack",
-        logo="logo6.png",
         employee_count="79",
         location="Москва",
-        description="Разработка сложных веб-сервисов и мобильных приложений"
+        description="Разработка сложных веб-сервисов и мобильных приложений",
+        owner = swiftattack_director
     )
     company_swiftattack.save()
 
     company_troller = Company(
         id="7",
         name="Troller",
-        logo="logo7.png",
         employee_count="230",
         location="Санкт-Петербург",
-        description="Мобильное приложение, позволяющее примерить обувь и выбрать идеальную пару всего в 3 клика"
+        description="Мобильное приложение, позволяющее примерить обувь и выбрать идеальную пару всего в 3 клика",
+        owner = troller_director
     )
     company_troller.save()
 
     company_primalassault = Company(
         id="8",
         name="Primal Assault",
-        logo="logo8.png",
         employee_count="13",
         location="Москва",
-        description="Реализуем проекты любой сложности в digital-сфере"
+        description="Реализуем проекты любой сложности в digital-сфере",
+        owner = primalassault_director
     )
     company_primalassault.save()
 
@@ -299,3 +327,6 @@ if __name__ == '__main__':
                     "письмо, почему именно вы подходите на эту вакансию.</p>"
     )
     job_accurate_python.save()
+
+
+
